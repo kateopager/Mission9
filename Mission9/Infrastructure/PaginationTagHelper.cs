@@ -35,7 +35,7 @@ namespace Mission9.Infrastructure
 
             TagBuilder final = new TagBuilder("div"); //building a div that will display and contain multiple pages
 
-            for(int i = 1; i < PageModel.TotalPages; i++)
+            for(int i = 1; i <= PageModel.TotalPages; i++)
             {
                 TagBuilder tb = new TagBuilder("a");
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
