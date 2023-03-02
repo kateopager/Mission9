@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mission9.Models;
+using Mission9.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +20,23 @@ namespace Mission9.Controllers
         public IActionResult Index(int pageNum = 1)
         {
 
-            int pageSize = 5;
+            int pageSize = 10;
 
-
-            var book = repo.Books
+            var x = new BooksViewModel
+            {
+                Books = repo.Books
                 .OrderBy(b => b.Title)
                 .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize);
-                
+                .Take(pageSize),
+                PageInfo = new PageInfo
+                {
+                    TotalNumBooks = repo.Books.Count(),
+                    BooksPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
 
-            return View(book);
+            };
+            return View(x);
         }
 
 
