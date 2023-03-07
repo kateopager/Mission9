@@ -17,7 +17,7 @@ namespace Mission9.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string bookCategory, int pageNum = 1)
         {
 
             int pageSize = 10;
@@ -25,6 +25,7 @@ namespace Mission9.Controllers
             var x = new BooksViewModel
             {
                 Books = repo.Books
+                .Where( b => b.Category)
                 .OrderBy(b => b.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
