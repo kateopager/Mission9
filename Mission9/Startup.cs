@@ -48,8 +48,17 @@ namespace Mission9
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "Page{pageNum}",
+                    defaults: new {Controller = "Home", action = "Index"}
+                    );
+
                 endpoints.MapDefaultControllerRoute(); //follow the controller first and route from there
             });
+
         }
+
     }
 }
