@@ -32,6 +32,9 @@ namespace Mission9
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
             });
             services.AddScoped<IBookstoreRepo, EFBookstorerepo>();
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,13 +46,29 @@ namespace Mission9
             }
 
             app.UseStaticFiles(); //tells asp.net to use files in wwwroot
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("categorypage",
+                    "{bookCategory}/ Page{pageNum}",
+                    new { Controller = "Home", action = "Index" });
+    
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "Page{pageNum}",
+                    defaults: new {Controller = "Home", action = "Index", pageNum=1}
+                    );
+
+                endpoints.MapControllerRoute("type", "{bookCategory}",
+                new { Controller = "Home", action = "Index", pageNum = 1 });
+
                 endpoints.MapDefaultControllerRoute(); //follow the controller first and route from there
+                endpoints.MapRazorPages();
             });
+
         }
+
     }
 }

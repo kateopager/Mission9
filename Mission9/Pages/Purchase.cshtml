@@ -1,0 +1,47 @@
+﻿@page
+@model Mission9.Pages.PurchaseModel
+@{
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> @*added a bootstrap with icons*@
+
+<h2>Current Basket</h2>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Subtotal</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var i in Model.basket.Items) //loop through and list the instances of basket for all items
+        {
+            <tr>
+                <td>@i.Books.Title</td>
+                <td>@i.Quantity</td>
+                <td>@i.Books.Price.ToString("c")</td>
+                <td>@((i.Quantity * i.Books.Price).ToString("c"))</td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+
+            <td colspan="3"> Total: </td>
+            <td>@Model.basket.CalculateTotal().ToString("c")</td>
+
+        </tr>
+
+    </tfoot>
+
+
+</table>
+<div>
+    <a class="btn btn-primary" href="@Model.ReturnUrl"><i class="bi bi-cart "></i> Continue with your purchase </a>
+</div>
