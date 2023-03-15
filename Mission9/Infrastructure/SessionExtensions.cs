@@ -11,7 +11,7 @@ namespace Mission9.Infrastructure
     {
         public static void SetJson (this ISession session, string key, object value)
         {
-            session.SetString(key, JsonSerializer.Serialize(value)); //this allows use to set a json object
+            session.SetString(key, JsonSerializer.Serialize(value)); //this allows us to set a json object
 
         }
 
