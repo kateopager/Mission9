@@ -11,6 +11,9 @@
 
 
 <form method="post" asp-controller="Purchase" asp-action="Checkout">
+
+  <div asp-validation-summary="All" class="text-danger" ></div>
+
     <h4>Ship to </h4>
 
     <div class="form-group">
@@ -41,7 +44,7 @@
     </div>
     <div>
         <label asp-for="Zip"> Zipcode:</label>
-        <input  asp-for="Zip" class="form-contorl" />
+        <input  asp-for="Zip" class="form-control" />
     </div>
     <div>
         <label asp-for="Country">Country:</label>

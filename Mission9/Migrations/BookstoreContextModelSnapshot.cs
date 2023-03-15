@@ -25,7 +25,7 @@ namespace Mission9.Migrations
                     b.Property<long?>("BooksBookId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PurchaseBookId")
+                    b.Property<int?>("PurchaseId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
@@ -35,7 +35,7 @@ namespace Mission9.Migrations
 
                     b.HasIndex("BooksBookId");
 
-                    b.HasIndex("PurchaseBookId");
+                    b.HasIndex("PurchaseId");
 
                     b.ToTable("BasketLineItem");
                 });
@@ -77,7 +77,7 @@ namespace Mission9.Migrations
 
             modelBuilder.Entity("Mission9.Models.Purchase", b =>
                 {
-                    b.Property<int>("BookId")
+                    b.Property<int>("PurchaseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -107,7 +107,11 @@ namespace Mission9.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("BookId");
+                    b.Property<string>("Zip")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("PurchaseId");
 
                     b.ToTable("Purchase");
                 });
@@ -120,7 +124,7 @@ namespace Mission9.Migrations
 
                     b.HasOne("Mission9.Models.Purchase", null)
                         .WithMany("Lines")
-                        .HasForeignKey("PurchaseBookId");
+                        .HasForeignKey("PurchaseId");
                 });
 #pragma warning restore 612, 618
         }

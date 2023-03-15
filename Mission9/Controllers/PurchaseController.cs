@@ -37,7 +37,7 @@ namespace Mission9.Controllers
                 purchase.Lines = basket.Items.ToArray();
                 repo.SavePurchase(purchase);
                 basket.ClearBasket();
-                return View();
+                return RedirectToPage("/PurchaseComplete");
             }
             else
             {

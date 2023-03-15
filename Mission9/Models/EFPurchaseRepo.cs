@@ -23,9 +23,7 @@ namespace Mission9.Models
             {
                 context.Purchase.Add(purchase);
             }
-
             context.SaveChanges();
-
         }
     }
 }

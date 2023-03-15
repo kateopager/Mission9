@@ -16,7 +16,6 @@ namespace Mission9.Models
         [BindNever]
         public ICollection<BasketLineItem> Lines { get; set; }
 
-
         [Required(ErrorMessage ="Name invalid: Please enter.")]
         public string Name { get; set; }
         [Required(ErrorMessage ="Address invalid: Please enter.")]

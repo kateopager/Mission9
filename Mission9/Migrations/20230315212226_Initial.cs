@@ -30,7 +30,7 @@ namespace Mission9.Migrations
                 name: "Purchase",
                 columns: table => new
                 {
-                    BookId = table.Column<int>(nullable: false)
+                    PurchaseId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false),
                     AddressLine1 = table.Column<string>(nullable: false),
@@ -38,11 +38,12 @@ namespace Mission9.Migrations
                     AddressLine3 = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: false),
                     State = table.Column<string>(nullable: false),
+                    Zip = table.Column<string>(nullable: false),
                     Country = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Purchase", x => x.BookId);
+                    table.PrimaryKey("PK_Purchase", x => x.PurchaseId);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,7 +54,7 @@ namespace Mission9.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     BooksBookId = table.Column<long>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
-                    PurchaseBookId = table.Column<int>(nullable: true)
+                    PurchaseId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,10 +66,10 @@ namespace Mission9.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BasketLineItem_Purchase_PurchaseBookId",
-                        column: x => x.PurchaseBookId,
+                        name: "FK_BasketLineItem_Purchase_PurchaseId",
+                        column: x => x.PurchaseId,
                         principalTable: "Purchase",
-                        principalColumn: "BookId",
+                        principalColumn: "PurchaseId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -78,9 +79,9 @@ namespace Mission9.Migrations
                 column: "BooksBookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketLineItem_PurchaseBookId",
+                name: "IX_BasketLineItem_PurchaseId",
                 table: "BasketLineItem",
-                column: "PurchaseBookId");
+                column: "PurchaseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
